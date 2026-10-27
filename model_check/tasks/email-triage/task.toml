@@ -1,0 +1,17 @@
+# Sort a small business's incoming e-mails into the team that should answer them.
+# A practice task: the e-mails are made up, written to include a few hard ones.
+name = "Sort customer e-mails"
+kind = "choice"
+labels = ["billing", "support", "sales", "spam"]
+target = 0.9   # good enough: at least 90% sorted right
+
+system = "You sort the e-mails a small online shop receives, so each reaches the right team."
+prompt = """Which team should handle this e-mail?
+
+- billing: invoices, payments, refunds, charges
+- support: a product or order that doesn't work, arrive or fit; how to use something
+- sales: wanting to buy, prices, quotes, bulk or business orders
+- spam: advertising, scams, messages not meant for the shop
+
+E-mail:
+{input}"""

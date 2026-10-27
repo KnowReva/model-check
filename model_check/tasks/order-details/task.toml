@@ -1,0 +1,23 @@
+# Pull the details out of an order a customer sent by e-mail or message.
+# A practice task: the messages are made up, with the usual mess of real ones (numbers in words,
+# dates written many ways, small talk around the order).
+name = "Order details from messages"
+kind = "fields"
+target = 0.85   # good enough: at least 85% of messages with every field right
+
+system = "You turn customers' order messages into records for a small shop's order book."
+prompt = """Read this order message and pull out the details.
+
+- customer: the name of the person or business ordering
+- product: what they want, as the shop would name it (no quantity in it)
+- quantity: how many, as a number (a dozen = 12)
+- deliver_by: the date they need it, as YYYY-MM-DD
+
+Message:
+{input}"""
+
+[fields]
+customer = { type = "string", match = "similar" }
+product = { type = "string", match = "similar" }
+quantity = { type = "number" }
+deliver_by = { type = "date" }

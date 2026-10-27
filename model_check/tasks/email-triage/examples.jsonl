@@ -1,0 +1,24 @@
+{"id": "e01", "input": "Hi, I was charged twice for order 4471 on my Visa. Can you refund the second charge? Thanks, Priya", "expected": "billing"}
+{"id": "e02", "input": "My kettle arrived yesterday but the lid won't stay closed. It pops open as soon as the water boils.", "expected": "support"}
+{"id": "e03", "input": "Do you offer a discount if we order 40 of the ceramic mugs for our cafe? We'd need them by May.", "expected": "sales"}
+{"id": "e04", "input": "Congratulations! Your e-mail was selected to receive a $500 gift card. Click here to claim before midnight.", "expected": "spam"}
+{"id": "e05", "input": "Could you send me a proper invoice with your tax number for order 5120? My accountant needs it.", "expected": "billing"}
+{"id": "e06", "input": "The tracking page says delivered but there's nothing at my door or with my neighbours. Order 5188.", "expected": "support"}
+{"id": "e07", "input": "What's the price for the large walnut cutting board, and do you ship to New Zealand?", "expected": "sales"}
+{"id": "e08", "input": "We help businesses rank #1 on Google in 30 days. Reply YES for a free SEO audit of your website.", "expected": "spam"}
+{"id": "e09", "input": "I returned the blue throw blanket two weeks ago and still haven't seen the refund on my card.", "expected": "billing"}
+{"id": "e10", "input": "How do I clean the cast iron pan? The leaflet in the box is only in German.", "expected": "support"}
+{"id": "e11", "input": "I run a small hotel and want to stock your soaps in all 18 rooms. Can you quote me a monthly supply?", "expected": "sales"}
+{"id": "e12", "input": "URGENT: your mailbox storage is full. Verify your password within 24 hours or your account will be closed.", "expected": "spam"}
+{"id": "e13", "input": "Your website took my money but I never got an order confirmation. Did the payment go through? Ref PX-88213.", "expected": "billing"}
+{"id": "e14", "input": "I ordered a medium apron and got a small. Can I swap it?", "expected": "support"}
+{"id": "e15", "input": "Is the linen tablecloth available in sage green? If so I'd like to buy three.", "expected": "sales"}
+{"id": "e16", "input": "Dear friend, I am a lawyer representing a late client with no heirs and need your help to transfer funds.", "expected": "spam"}
+{"id": "e17", "input": "Why does my statement show a $4.99 charge from your shop every month? I never signed up for anything.", "expected": "billing"}
+{"id": "e18", "input": "The teapot I bought last month has a crack along the spout. It only happened when I poured hot water.", "expected": "support"}
+{"id": "e19", "input": "Hello, do you make custom engraved boards? We want 120 as gifts for our staff at the end of the year.", "expected": "sales"}
+{"id": "e20", "input": "Hot singles in your area are waiting to meet you. No credit card needed.", "expected": "spam"}
+{"id": "e21", "input": "The invoice for my wholesale order lists 30 mugs but we only received and kept 24. Please correct it.", "expected": "billing"}
+{"id": "e22", "input": "Your instructions say to oil the board weekly. Which oil is safe for food?", "expected": "support"}
+{"id": "e23", "input": "We saw your stall at the Saturday market. Do you sell wholesale to shops, and what's the minimum order?", "expected": "sales"}
+{"id": "e24", "input": "Your package could not be delivered due to an unpaid customs fee of $1.99. Pay now at the link below.", "expected": "spam"}
