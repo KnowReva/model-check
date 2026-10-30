@@ -91,7 +91,10 @@ def table(task: dict, rows: list[dict]) -> str:
     head = ["Model", "Right", "Accuracy (95% range)", "Seconds an answer", "Memory", "Verdict"]
     lines = ["| " + " | ".join(head) + " |", "|" + "---|" * len(head)]
     for r in sorted(rows, key=lambda r: (-r["accuracy"], r["seconds"])):
-        mem = f"{r['memory_gb']:.1f} GB" + (" (GPU)" if r["gpu_share"] > 0.9 else "") if r["memory_gb"] else "?"
+        if r["model"].endswith("cloud"):  # runs on Ollama's servers: nothing in this computer's memory
+            mem = "cloud"
+        else:
+            mem = f"{r['memory_gb']:.1f} GB" + (" (GPU)" if r["gpu_share"] > 0.9 else "") if r["memory_gb"] else "?"
         lines.append(f"| {r['model']} | {r['right']}/{r['n']} | {r['accuracy']:.0%} ({r['low']:.0%} to {r['high']:.0%}) | "
                      f"{r['seconds']:.1f} | {mem} | {r['verdict']} |")  # fmt: skip
     return "\n".join(lines)

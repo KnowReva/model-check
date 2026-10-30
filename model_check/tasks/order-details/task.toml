@@ -8,7 +8,7 @@ target = 0.85   # good enough: at least 85% of messages with every field right
 system = "You turn customers' order messages into records for a small shop's order book."
 prompt = """Read this order message and pull out the details.
 
-- customer: the name of the person or business ordering
+- customer: who is ordering: the business when someone writes for one, otherwise the person
 - product: what they want, as the shop would name it (no quantity in it)
 - quantity: how many, as a number (a dozen = 12)
 - deliver_by: the date they need it, as YYYY-MM-DD
