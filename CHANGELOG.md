@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.1.1 (2026-10-30)
+
+- Cloud models (e.g. beam:cloud): an answer whose JSON comes wrapped in words, ```json fences or
+  <think> notes, or sits in the thinking part, still counts; the error shows what came back.
+
 ## 0.1.0 (2026-10-27)
 
 - `init`, `models`, `run`, `report`, `show`.

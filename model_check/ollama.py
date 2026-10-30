@@ -12,6 +12,7 @@ Only the standard library is used. The calls:
 import base64
 import json
 import os
+import re
 import urllib.error
 import urllib.request
 from pathlib import Path
@@ -55,6 +56,26 @@ def _call(path: str, body: dict | None = None, url: str = DEFAULT_URL, timeout: 
         raise OllamaError(f"Can't reach Ollama at {url} ({e.reason}). Is it running? Try: ollama serve") from None
 
 
+def extract_json(text: str):
+    """The JSON object in a model's text: as it is, inside ```json fences, or after a few words or
+    <think> notes (cloud models aren't always held to the schema). None when there is none."""
+    text = re.sub(r"<think>.*?</think>", "", text or "", flags=re.S).strip()
+    text = re.sub(r"^```(?:json)?\s*|\s*```$", "", text).strip()
+    try:
+        return json.loads(text)
+    except ValueError:
+        pass
+    decoder = json.JSONDecoder()
+    for m in list(re.finditer(r"\{", text))[:20]:
+        try:
+            value, _ = decoder.raw_decode(text[m.start():])
+            if isinstance(value, dict):
+                return value
+        except ValueError:
+            continue
+    return None
+
+
 def ask(model: str, system: str, prompt: str, schema: dict, images: list[Path] = (), url: str = DEFAULT_URL,
         timeout: float = 600) -> dict:  # fmt: skip
     """One question. Returns {answer: dict, seconds, load_seconds, tokens, tokens_per_second}."""
@@ -78,10 +99,14 @@ def ask(model: str, system: str, prompt: str, schema: dict, images: list[Path] =
               "tokens_per_second": round(tokens / eval_s, 1) if eval_s else 0.0}  # fmt: skip
     if (reply.get("done_reason") or "stop") != "stop":
         raise BadAnswer(f"the answer was cut off (done_reason: {reply.get('done_reason')})", timing)
-    try:
-        answer = json.loads(reply["message"]["content"])
-    except (KeyError, TypeError, json.JSONDecodeError) as e:
-        raise BadAnswer(f"the answer wasn't valid JSON ({e})", timing) from None
+    msg = reply.get("message") or {}
+    answer = None
+    for text in (msg.get("content"), msg.get("thinking")):  # cloud models may wrap it, or answer while "thinking"
+        answer = extract_json(text or "")
+        if isinstance(answer, dict):
+            break
+    if answer is None:
+        raise BadAnswer(f"the answer wasn't valid JSON: {str(msg.get('content', ''))[:120]!r}", timing)
     if not isinstance(answer, dict):
         raise BadAnswer("the answer wasn't a JSON object", timing)
     return {"answer": answer, **timing}

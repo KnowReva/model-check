@@ -227,3 +227,9 @@ def test_the_command_line(tmp_path, capsys, server):
     assert 'expected: "billing"' in capsys.readouterr().out
     assert cli.main(["report", str(tmp_path / "nothing")]) == 1
     assert cli.main(["init", str(tmp_path / "mine")]) == 0 and tasks.load(tmp_path / "mine")["kind"] == "choice"
+
+
+def test_an_answer_wrapped_in_words_or_fences_still_counts():
+    assert ollama.extract_json('```json\n{"answer": "a"}\n```') == {"answer": "a"}
+    assert ollama.extract_json('Sure: {"answer": "b"} done') == {"answer": "b"}
+    assert ollama.extract_json("<think>x</think> no json here") is None
