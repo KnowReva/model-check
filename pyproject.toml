@@ -27,3 +27,7 @@ packages = ["model_check"]
 
 [tool.setuptools.package-data]
 model_check = ["tasks/*/*.toml", "tasks/*/*.jsonl"]
+
+[tool.pytest.ini_options]
+pythonpath = ["."]
+testpaths = ["tests"]
